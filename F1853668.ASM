@@ -18,9 +18,9 @@ MAIN	PROC	FAR
 	DIV	BL
       	MOV	CL,AL
 	MOV	CH,0
-	MOV	DX,0;Ϊ�˷�ֹ�ַ�������ż��
+	MOV	DX,0;为了防止字符串中无偶数
 	MOV	BX,OFFSET DATA
-      	MOV	AX,8000H;��С�Ĵ�������
+      	MOV	AX,8000H;最小的带符号数
 AGAIN:  	TEST	WORD PTR DS:[BX],1
 	JNZ	NEXT
         	CMP	AX,[BX]
@@ -34,11 +34,11 @@ NEXT:   	INC	BX
 	JNZ	DOWN
 	LEA	DX,WARN
 	MOV	AH,9
-	INT	21H;�����ż��������ʾ
+	INT	21H;输出无偶数错误提示
 	RET
 DOWN:    MOV	BX,AX
 	CALL	DISPBX
 	RET
 MAIN	ENDP
 CODE	ENDS
-END	MAIN
+END	MAIN;MODE
